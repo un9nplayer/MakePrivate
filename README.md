@@ -1,17 +1,22 @@
-# MakePrivate
+# MakePrivate - Securely Hide Your Files
 
-A lightweight batch script for hiding files and folders on Windows systems using built-in commands. This repository provides a simple and efficient solution without requiring third-party tools.
+MakePrivate is a batch script that locks and hides a folder named "Private" on Windows systems. It provides an efficient way to secure sensitive data without the need for third-party tools. The script includes password protection and ensures that unauthorized users cannot access the hidden files.
 
 ## Features
-- **Hide Files and Folders**: Mark files or folders as "hidden" and "system" using the `attrib` command.
-- **Optional Password Protection**: Add a password prompt for extra security.
-- **Stealthy**: The script can be disguised with a different name or icon.
-- **Reversible**: Easily unhide files using the same script or manual commands.
+- **Folder Locking**: Renames and hides the "Private" folder by converting it into a system-protected directory.
+- **Password Protection**: Prevents unauthorized access to the locked folder.
+- **User Prompts**: Includes confirmation dialogs and password input.
+- **Reversible Process**: Unlock and access your files using the correct password.
 
 ## How It Works
-1. **Hiding Files**: The script applies `+h` (hidden) and `+s` (system) attributes to make files or folders invisible in File Explorer.
-2. **Revealing Files**: The script removes `+h` and `+s` attributes to make files visible again.
-3. **Password Protection** (Optional): Modify the script to prompt for a password during execution.
+1. **Locking the Folder**:
+   - The "Private" folder is renamed to `Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}` and marked with hidden and system attributes.
+   - The folder becomes invisible and inaccessible to users.
+2. **Unlocking the Folder**:
+   - Users are prompted to enter a password.
+   - If the password matches, the folder is renamed back to "Private" and its attributes are removed.
+3. **Creating the Folder**:
+   - If the "Private" folder does not exist, the script creates it automatically.
 
 ## Getting Started
 
@@ -19,22 +24,34 @@ A lightweight batch script for hiding files and folders on Windows systems using
 - A Windows system.
 
 ### Installation
-1. Clone the repository or download the `.bat` file.
-2. Open the script in a text editor to review or customize it.
+1. Download the `MakePrivate.bat` file.
+2. Place it in the directory where you want to secure your files.
 
 ### Usage
-1. Run the `.bat` file by double-clicking it.
-2. Follow the prompts to hide or unhide files and folders.
+1. Double-click `MakePrivate.bat` to run the script.
+2. Follow the on-screen prompts:
+   - **To lock the folder**: Confirm by typing `Y` or `N` when prompted.
+   - **To unlock the folder**: Enter the correct password when prompted.
 
-### Example Commands
-- **Hide a file**:
+### Default Password
+The default password is `Paassword`. You can change it by editing the script. Replace `Paassword` in the `UNLOCK` section with your desired password.
+
+## Example Commands
+- Lock the folder:
   ```cmd
-  attrib +h +s "C:\path\to\file"
+  ren Private "Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}"
+  attrib +h +s "Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}"
   ```
-- **Unhide a file**:
+- Unlock the folder:
   ```cmd
-  attrib -h -s "C:\path\to\file"
+  attrib -h -s "Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}"
+  ren "Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}" Private
   ```
+
+## Notes
+- Make sure to remember your password. Without it, you cannot access your hidden files.
+- Avoid renaming the script file or the "Private" folder manually to prevent errors.
+- Test with non-critical files before using it for important data.
 
 ## Contributing
 Contributions are welcome! Feel free to fork this repository, submit pull requests, or suggest improvements via issues.
@@ -43,5 +60,5 @@ Contributions are welcome! Feel free to fork this repository, submit pull reques
 This project is licensed under the MIT License. See the `LICENSE` file for details.
 
 ## Disclaimer
-This script is provided for educational and personal use only. Use it responsibly. The creator is not liable for any misuse, data loss, or damages caused by this script.
+MakePrivate is for educational and personal use only. Use it responsibly. The creator is not liable for any misuse, data loss, or damages caused by this script.
 
